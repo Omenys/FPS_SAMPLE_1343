@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class PlayerHUD : MonoBehaviour
 {
     [SerializeField] Image healthBar;
-    [SerializeField] TMP_Text currentAmmoText;
+    [SerializeField] TextMeshProUGUI currentAmmoText;
     [SerializeField] TMP_Text maxAmmoText;
 
     FPSController player;
@@ -16,5 +14,14 @@ public class PlayerHUD : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<FPSController>();
+
+    }
+
+
+    public void UpdateAmmo(Gun gun)
+    {
+        currentAmmoText.text = gun.ammo.ToString();
+        maxAmmoText.text = gun.maxAmmo.ToString();
+
     }
 }

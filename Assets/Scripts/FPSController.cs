@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 public class FPSController : MonoBehaviour
 {
@@ -9,6 +9,7 @@ public class FPSController : MonoBehaviour
     [SerializeField] GameObject cam;
     [SerializeField] Transform gunHold;
     [SerializeField] Gun initialGun;
+    //[SerializeField] UnityEvent OnFire;
 
     // stats
     [SerializeField] float movementSpeed = 2.0f;
@@ -16,7 +17,7 @@ public class FPSController : MonoBehaviour
     [SerializeField] float lookSensitivityY = 1.0f;
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float jumpForce = 10;
-    
+
     // private variables
     Vector3 velocity;
     bool grounded;
@@ -27,11 +28,11 @@ public class FPSController : MonoBehaviour
 
     // properties
     public GameObject Cam { get { return cam; } }
-    
+
 
     private void Awake()
     {
-        
+
     }
 
     // Start is called before the first frame update
@@ -62,18 +63,18 @@ public class FPSController : MonoBehaviour
     {
         grounded = controller.isGrounded;
 
-        if(grounded && velocity.y < 0)
+        if (grounded && velocity.y < 0)
         {
-            velocity.y = -0.5f;
+            velocity.y = -1f;
         }
 
         Vector2 movement = GetPlayerMovementVector();
-        Vector3 move = transform.right * movement.x + transform.forward * movement.y;
+        Vector3 move = (transform.right * movement.x) + (transform.forward * movement.y);
         controller.Move(move * movementSpeed * (GetSprint() ? 2 : 1) * Time.deltaTime);
 
         if (Input.GetButtonDown("Jump") && grounded)
         {
-            velocity.y += Mathf.Sqrt (jumpForce * -1 * gravity);
+            velocity.y += Mathf.Sqrt(jumpForce * -1 * gravity);
         }
 
         velocity.y += gravity * Time.deltaTime;
@@ -97,7 +98,7 @@ public class FPSController : MonoBehaviour
 
     void FireGun()
     {
-        if(GetPressFire())
+        if (GetPressFire())
         {
             currentGun?.AttemptFire();
         }
@@ -169,7 +170,7 @@ public class FPSController : MonoBehaviour
         {
             var collisionPoint = hit.collider.ClosestPoint(transform.position);
             var knockbackAngle = (transform.position - collisionPoint).normalized;
-            velocity = (20 * knockbackAngle);
+            velocity = 20 * knockbackAngle;
         }
     }
 }
