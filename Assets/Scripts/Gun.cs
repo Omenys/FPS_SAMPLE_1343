@@ -10,7 +10,7 @@ public class Gun : MonoBehaviour
 
     // events
     [SerializeField] UnityEvent<int, int> AmmoUpdate;
-
+    [SerializeField] UnityEvent Interact;
 
     // stats
     [SerializeField] int maxAmmo;
@@ -63,8 +63,22 @@ public class Gun : MonoBehaviour
 
     public void AddAmmo(int amount)
     {
-        ammo += amount;
+        /*if (ammo + amount > maxAmmo)
+        {
+            ammo = maxAmmo;
+        }
+        else
+        {
+            ammo += amount;
+        }*/
+
+        ammo = maxAmmo;
+        AmmoUpdate?.Invoke(maxAmmo, ammo);
+
+        //Debug.Log("Gun event works!");
+
     }
 
-
 }
+
+
