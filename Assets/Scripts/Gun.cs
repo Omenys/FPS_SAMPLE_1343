@@ -10,7 +10,7 @@ public class Gun : MonoBehaviour
 
     // events
     [SerializeField] UnityEvent<int, int> AmmoUpdate;
-    [SerializeField] UnityEvent Interact;
+    [SerializeField] UnityEvent<float, float> OnFire;
 
     // stats
     [SerializeField] int maxAmmo;
@@ -24,6 +24,8 @@ public class Gun : MonoBehaviour
     void Start()
     {
         ammo = maxAmmo;
+
+        // Update ammo
         AmmoUpdate?.Invoke(maxAmmo, ammo);
     }
 
@@ -32,6 +34,7 @@ public class Gun : MonoBehaviour
     {
         elapsed += Time.deltaTime;
     }
+
 
     public bool AttemptFire()
     {
@@ -45,17 +48,17 @@ public class Gun : MonoBehaviour
             return false;
         }
 
-
         Debug.Log("Bang");
         Instantiate(bulletPrefab, gunBarrelEnd.transform.position, gunBarrelEnd.rotation);
         anim.SetTrigger("shoot");
         timeBetweenShots = 0;
         ammo -= 1;
 
-
+        // Update ammo
         AmmoUpdate?.Invoke(maxAmmo, ammo);
 
-        Debug.Log(ammo);
+        // Shake camera
+        OnFire?.Invoke(0.1f, 2.5f);
 
 
         return true;
@@ -73,9 +76,11 @@ public class Gun : MonoBehaviour
         }*/
 
         ammo = maxAmmo;
+
+        // Update ammo
         AmmoUpdate?.Invoke(maxAmmo, ammo);
 
-        //Debug.Log("Gun event works!");
+
 
     }
 

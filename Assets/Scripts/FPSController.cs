@@ -30,11 +30,6 @@ public class FPSController : MonoBehaviour
     public GameObject Cam { get { return cam; } }
 
 
-    private void Awake()
-    {
-
-    }
-
     // Start is called before the first frame update
     void Start()
     {

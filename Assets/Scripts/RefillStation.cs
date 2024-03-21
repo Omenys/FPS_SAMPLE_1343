@@ -17,7 +17,7 @@ public class RefillStation : MonoBehaviour
         if (Input.GetButtonDown("Interact"))
         {
             Interact.Invoke();
-            //Debug.Log("Player Event works!");
+
         }
     }
 
