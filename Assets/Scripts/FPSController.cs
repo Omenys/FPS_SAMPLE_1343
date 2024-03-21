@@ -8,8 +8,8 @@ public class FPSController : MonoBehaviour
     CharacterController controller;
     [SerializeField] GameObject cam;
     [SerializeField] Transform gunHold;
-    [SerializeField] Gun initialGun;
-    //[SerializeField] UnityEvent OnFire;
+    [SerializeField] public Gun initialGun;
+
 
     // stats
     [SerializeField] float movementSpeed = 2.0f;

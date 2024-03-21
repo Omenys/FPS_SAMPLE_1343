@@ -7,21 +7,24 @@ public class Gun : MonoBehaviour
     [SerializeField] Transform gunBarrelEnd;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Animator anim;
-    [SerializeField] UnityEvent OnFire;
+
+    // events
+    [SerializeField] UnityEvent<int, int> AmmoUpdate;
 
 
     // stats
-    [SerializeField] public int maxAmmo;
+    [SerializeField] int maxAmmo;
     [SerializeField] float timeBetweenShots = 0.1f;
 
     // private variables
-    public int ammo;
+    int ammo;
     float elapsed = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         ammo = maxAmmo;
+        AmmoUpdate?.Invoke(maxAmmo, ammo);
     }
 
     // Update is called once per frame
@@ -42,14 +45,17 @@ public class Gun : MonoBehaviour
             return false;
         }
 
+
         Debug.Log("Bang");
         Instantiate(bulletPrefab, gunBarrelEnd.transform.position, gunBarrelEnd.rotation);
         anim.SetTrigger("shoot");
         timeBetweenShots = 0;
         ammo -= 1;
 
-        OnFire?.Invoke();
-        //Debug.Log(ammo);
+
+        AmmoUpdate?.Invoke(maxAmmo, ammo);
+
+        Debug.Log(ammo);
 
 
         return true;
@@ -59,4 +65,6 @@ public class Gun : MonoBehaviour
     {
         ammo += amount;
     }
+
+
 }

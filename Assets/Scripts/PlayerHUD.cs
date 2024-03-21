@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class PlayerHUD : MonoBehaviour
 {
     [SerializeField] Image healthBar;
-    [SerializeField] TextMeshProUGUI currentAmmoText;
+    [SerializeField] TMP_Text currentAmmoText;
     [SerializeField] TMP_Text maxAmmoText;
 
     FPSController player;
@@ -18,10 +18,10 @@ public class PlayerHUD : MonoBehaviour
     }
 
 
-    public void UpdateAmmo(Gun gun)
+    public void UpdateAmmo(int maxAmmo, int currentAmmo)
     {
-        currentAmmoText.text = gun.ammo.ToString();
-        maxAmmoText.text = gun.maxAmmo.ToString();
+        maxAmmoText.text = maxAmmo.ToString();
+        currentAmmoText.text = currentAmmo.ToString();
 
     }
 }
