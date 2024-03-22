@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class FPSController : MonoBehaviour
@@ -26,9 +27,14 @@ public class FPSController : MonoBehaviour
     int gunIndex = 0;
     Gun currentGun = null;
 
+    //health variable
+    [SerializeField] float health;
+
     // properties
     public GameObject Cam { get { return cam; } }
 
+    // events
+    [SerializeField] UnityEvent OnDamage;
 
     // Start is called before the first frame update
     void Start()
@@ -166,6 +172,12 @@ public class FPSController : MonoBehaviour
             var collisionPoint = hit.collider.ClosestPoint(transform.position);
             var knockbackAngle = (transform.position - collisionPoint).normalized;
             velocity = 20 * knockbackAngle;
+
+            // Screen fade
+            OnDamage?.Invoke();
+
+            // Subtract health
+            health--;
         }
     }
 }
