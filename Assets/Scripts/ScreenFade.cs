@@ -18,11 +18,14 @@ public class ScreenFade : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        var currentColor = fadeImage.color;
+        currentColor = Color.Lerp(currentColor, targetColor, fadeSpeed * Time.deltaTime);
+        fadeImage.color = currentColor;
+
         if (duration > 0)
         {
-            var currentColor = fadeImage.color;
-            currentColor = Color.Lerp(currentColor, targetColor, fadeSpeed * Time.deltaTime);
-            fadeImage.color = currentColor;
+            // Set screen red
+            SetTargetColorToRed();
 
             // Count down fade duration
             duration -= Time.deltaTime;

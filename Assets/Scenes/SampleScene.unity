@@ -4307,6 +4307,7 @@ MonoBehaviour:
   targetColor: {r: 1, g: 0, b: 0, a: 0.33333334}
   fadeImage: {fileID: 1694548565}
   fadeSpeed: 5
+  duration: 0
 --- !u!114 &1616618211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5890,7 +5891,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 0.2
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
