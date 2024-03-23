@@ -11,6 +11,7 @@ public class Gun : MonoBehaviour
     // events
     [SerializeField] UnityEvent<int, int> AmmoUpdate;
     [SerializeField] UnityEvent<float, float> OnFire;
+    [SerializeField] UnityEvent Emit;
 
     // stats
     [SerializeField] int maxAmmo;
@@ -56,6 +57,9 @@ public class Gun : MonoBehaviour
 
         // Update ammo
         AmmoUpdate?.Invoke(maxAmmo, ammo);
+
+        // Particle system for muzzle flash
+        Emit?.Invoke();
 
         // Shake camera
         OnFire?.Invoke(0.1f, 2.5f);
