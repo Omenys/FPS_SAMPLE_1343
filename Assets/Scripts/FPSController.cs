@@ -18,6 +18,8 @@ public class FPSController : MonoBehaviour
     [SerializeField] float lookSensitivityY = 1.0f;
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float jumpForce = 10;
+    [SerializeField] float currentHealth;
+    [SerializeField] float maxHealth;
 
     // private variables
     Vector3 velocity;
@@ -27,11 +29,21 @@ public class FPSController : MonoBehaviour
     int gunIndex = 0;
     Gun currentGun = null;
 
-    //health variable
-    [SerializeField] float health;
+
 
     // properties
     public GameObject Cam { get { return cam; } }
+    public float Health
+    {
+        get { return currentHealth; }
+        set { currentHealth = value; }
+    }
+
+    public float MaxHealth
+    {
+        get { return maxHealth; }
+        set { maxHealth = value; }
+    }
 
     // events
     [SerializeField] UnityEvent OnDamage;
@@ -44,6 +56,9 @@ public class FPSController : MonoBehaviour
 
         // start with a gun
         AddGun(initialGun);
+
+        // start with max health
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -177,7 +192,10 @@ public class FPSController : MonoBehaviour
             OnDamage?.Invoke();
 
             // Subtract health
-            health--;
+            if (currentHealth > 0)
+            {
+                currentHealth--;
+            }
         }
     }
 }

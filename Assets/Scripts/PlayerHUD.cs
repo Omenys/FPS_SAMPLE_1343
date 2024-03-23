@@ -8,6 +8,7 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] TMP_Text currentAmmoText;
     [SerializeField] TMP_Text maxAmmoText;
 
+
     FPSController player;
 
     // Start is called before the first frame update
@@ -17,7 +18,13 @@ public class PlayerHUD : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        // Update health bar
+        healthBar.fillAmount = player.Health / player.MaxHealth;
+    }
 
+    // Update ammo text
     public void UpdateAmmo(int maxAmmo, int currentAmmo)
     {
         maxAmmoText.text = maxAmmo.ToString();
